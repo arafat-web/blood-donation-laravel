@@ -1,0 +1,16 @@
+
+#counters {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 33px;
+}
+
+#counters .counter {
+  font-size: 44px;
+  font-weight: 600;
+  color: #7b2314;
+  align-items: center;
+  vertical-align: middle;
+}
+/*# sourceMappingURL=style.css.map */
