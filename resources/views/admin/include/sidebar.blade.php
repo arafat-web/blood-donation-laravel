@@ -42,14 +42,14 @@
             <span>Donor List</span></a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="product-type.html">
+    <li class="nav-item {{ request()->routeIs('location.settings') ? 'active' : null }}">
+        <a class="nav-link" href="{{route('location.settings')}}">
             <i class="fas fa-fw fa-table"></i>
             <span>Location Settings</span></a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="product-type.html">
+    <li class="nav-item {{ request()->routeIs('donation.settings') ? 'active' : null }}">
+        <a class="nav-link" href="{{route('donation.settings')}}">
             <i class="fas fa-fw fa-table"></i>
             <span>Donation Settings</span></a>
     </li>

@@ -18,7 +18,15 @@ class AdminController extends Controller
     {
         return view('admin.donor-request');
     }
-    public function donorList(){
+    public function donorList()
+    {
         return view('admin.donor-list');
+    }
+    public function locationSettings()
+    {
+        return view('admin.location-settings');
+    }
+    public function donationSettings(){
+        return view('admin.donation-settings');
     }
 }

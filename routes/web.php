@@ -31,4 +31,6 @@ Route::prefix('admin')->group(function () {
     Route::get("/add-donor", [AdminController::class, 'addDonor'])->name('add.donor');
     Route::get("/donor-request", [AdminController::class, 'donorRequest'])->name('donor.request');
     Route::get("/donor-list", [AdminController::class, 'donorList'])->name('donor.list');
+    Route::get("/location-settings", [AdminController::class, 'locationSettings'])->name('location.settings');
+    Route::get("/donation-settings", [AdminController::class, 'donationSettings'])->name('donation.settings');
 });
