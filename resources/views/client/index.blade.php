@@ -47,7 +47,7 @@
                                     </select>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <select class="custom-select small" id="city">
+                                    <select class="custom-select small select-2" id="city">
                                         <option disabled selected>Select Location</option>
                                         <option value="1">Dhaka</option>
                                         <option value="2">Rajshahi</option>

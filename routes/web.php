@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\BloodController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -33,4 +34,11 @@ Route::prefix('admin')->group(function () {
     Route::get("/donor-list", [AdminController::class, 'donorList'])->name('donor.list');
     Route::get("/location-settings", [AdminController::class, 'locationSettings'])->name('location.settings');
     Route::get("/donation-settings", [AdminController::class, 'donationSettings'])->name('donation.settings');
+
+    Route::prefix('group')->group(function () {
+        Route::post("/add", [BloodController::class, 'add'])->name('blood.add');
+        // Route::get("/add-donor", [AdminController::class, 'addDonor'])->name('add.donor');
+        // Route::get("/donor-request", [AdminController::class, 'donorRequest'])->name('donor.request');
+        // Route::get("/donor-list", [AdminController::class, 'donorList'])->name('donor.list');
+    });
 });

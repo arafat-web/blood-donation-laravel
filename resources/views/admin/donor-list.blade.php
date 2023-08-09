@@ -33,7 +33,7 @@
                                         <th>Location</th>
                                         <th>Phone</th>
                                         <th>Email</th>
-                                        <th>Register Date</th>
+                                        <th>Added Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>

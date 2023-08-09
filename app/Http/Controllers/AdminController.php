@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blood;
 use Illuminate\Http\Request;
 
 class AdminController extends Controller
@@ -26,7 +27,9 @@ class AdminController extends Controller
     {
         return view('admin.location-settings');
     }
-    public function donationSettings(){
-        return view('admin.donation-settings');
+    public function donationSettings()
+    {
+        $bloods = Blood::all();
+        return view('admin.donation-settings', compact('bloods'));
     }
 }
