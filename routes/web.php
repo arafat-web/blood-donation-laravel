@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -23,3 +24,11 @@ Route::get("/donate-now", [HomeController::class, 'donateNow'])->name('donate.no
 Route::get("/donor-register", [HomeController::class, 'donorRegister'])->name('donor.register');
 Route::get("/search-donor", [HomeController::class, 'searchDonor'])->name('search.donor');
 Route::get("/donor-profile", [HomeController::class, 'donorProfile'])->name('donor.profile');
+
+// Admin routes //
+Route::prefix('admin')->group(function () {
+    Route::get("/dashboard", [AdminController::class, 'index'])->name('dashboard');
+    Route::get("/add-donor", [AdminController::class, 'addDonor'])->name('add.donor');
+    Route::get("/donor-request", [AdminController::class, 'donorRequest'])->name('donor.request');
+    Route::get("/donor-list", [AdminController::class, 'donorList'])->name('donor.list');
+});

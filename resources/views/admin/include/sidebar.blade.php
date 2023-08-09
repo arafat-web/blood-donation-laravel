@@ -10,8 +10,8 @@
     <hr class="sidebar-divider my-0">
 
     <!-- Nav Item - Dashboard -->
-    <li class="nav-item active">
-        <a class="nav-link" href="index.html">
+    <li class="nav-item {{ request()->routeIs('dashboard') ? 'active' : null }}">
+        <a class="nav-link" href="{{ route('dashboard') }}">
             <i class="fas fa-fw fa-tachometer-alt"></i>
             <span>Dashboard</span></a>
     </li>
@@ -24,20 +24,20 @@
         Management
     </div>
 
-    <li class="nav-item">
-        <a class="nav-link" href="products.html">
+    <li class="nav-item {{ request()->routeIs('add.donor') ? 'active' : null }}">
+        <a class="nav-link" href="{{ route('add.donor') }}">
             <i class="fas fa-fw fa-table"></i>
             <span>Add Donor</span></a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="departments.html">
+    <li class="nav-item {{ request()->routeIs('donor.request') ? 'active' : null }}">
+        <a class="nav-link" href="{{ route('donor.request') }}">
             <i class="fas fa-fw fa-table"></i>
             <span>Donor Request</span></a>
     </li>
 
-    <li class="nav-item">
-        <a class="nav-link" href="suppliers.html">
+    <li class="nav-item {{ request()->routeIs('donor.list') ? 'active' : null }}">
+        <a class="nav-link" href="{{ route('donor.list') }}">
             <i class="fas fa-fw fa-table"></i>
             <span>Donor List</span></a>
     </li>
