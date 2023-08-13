@@ -36,18 +36,28 @@
                                 <div class="input-group mb-3">
                                     <select class="custom-select small" id="bloodgroup">
                                         <option disabled selected>Select Blood Group</option>
-                                        <option value="1">A+</option>
-                                        <option value="2">A-</option>
-                                        <option value="3">B+</option>
-                                        <option value="4">B-</option>
-                                        <option value="5">AB+</option>
-                                        <option value="6">AB-</option>
-                                        <option value="7">B+</option>
-                                        <option value="8">O-</option>
+                                        @foreach ($groups as $group)
+                                        <option value="{{$group->id}}">{{$group->blood_group}}</option>
+                                        @endforeach
+
+
                                     </select>
                                 </div>
                                 <div class="input-group mb-3">
                                     <select class="custom-select small select-2" id="city">
+                                        <option disabled selected>Select City</option>
+                                        <option value="1">Dhaka</option>
+                                        <option value="2">Rajshahi</option>
+                                        <option value="3">Chottogram</option>
+                                        <option value="4">Barishal</option>
+                                        <option value="5">Khulna</option>
+                                        <option value="6">Sylhet</option>
+                                        <option value="7">Rangpur</option>
+                                        <option value="8">Mymensing</option>
+                                    </select>
+                                </div>
+                                <div class="input-group mb-3">
+                                    <select class="custom-select small select-2" id="location">
                                         <option disabled selected>Select Location</option>
                                         <option value="1">Dhaka</option>
                                         <option value="2">Rajshahi</option>
@@ -70,8 +80,7 @@
                                 <div class="input-group mb-3">
                                     <input type="date" id="date" class="form-control small" />
                                 </div>
-                                <button class="btn btn-danger w-100"><a class="text-white" href="search-donors.html">Search
-                                        Donors </a></button>
+                                <button class="btn btn-danger w-100">Search Donor</button>
                             </form>
 
                         </div>

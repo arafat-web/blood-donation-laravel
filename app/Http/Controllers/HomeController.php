@@ -2,12 +2,14 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Blood;
 use Illuminate\Http\Request;
 
 class HomeController extends Controller
 {
     public function index(){
-        return view('client.index');
+        $groups = Blood::orderBy('id', 'desc')->get();
+        return view('client.index', compact('groups'));
     }
     public function contact(){
         return view('client.contact');
