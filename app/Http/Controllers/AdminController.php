@@ -15,7 +15,10 @@ class AdminController extends Controller
     }
     public function addDonor()
     {
-        return view('admin.add-donor');
+        $bloods = Blood::all();
+        $cities = City::orderBy('id', 'DESC')->get();
+        $locations = Location::orderBy('id', 'DESC')->get();
+        return view('admin.add-donor', compact('bloods', 'cities', 'locations'));
     }
     public function donorRequest()
     {

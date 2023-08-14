@@ -39,8 +39,6 @@
                                         @foreach ($groups as $group)
                                         <option value="{{$group->id}}">{{$group->blood_group}}</option>
                                         @endforeach
-
-
                                     </select>
                                 </div>
                                 <div class="input-group mb-3">
