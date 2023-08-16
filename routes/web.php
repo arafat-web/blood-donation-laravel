@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\BloodController;
 use App\Http\Controllers\CityLocationController;
+use App\Http\Controllers\DonorController;
 use App\Http\Controllers\HomeController;
 use Illuminate\Support\Facades\Route;
 
@@ -38,13 +39,21 @@ Route::prefix('admin')->group(function () {
 
     Route::prefix('group')->group(function () {
         Route::post("/add", [BloodController::class, 'add'])->name('blood.add');
-        // Route::get("/add-donor", [AdminController::class, 'addDonor'])->name('add.donor');
+        Route::post("/add-donor", [DonorController::class, 'addDonor'])->name('add.donor');
         // Route::get("/donor-request", [AdminController::class, 'donorRequest'])->name('donor.request');
         // Route::get("/donor-list", [AdminController::class, 'donorList'])->name('donor.list');
     });
+
+    Route::prefix('donor')->group(function () {
+        Route::post("/add-donor", [DonorController::class, 'addDonor'])->name('add.donor');
+        // Route::get("/donor-request", [AdminController::class, 'donorRequest'])->name('donor.request');
+        // Route::get("/donor-list", [AdminController::class, 'donorList'])->name('donor.list');
+    });
+
     Route::prefix('city')->group(function () {
         Route::post("/add", [CityLocationController::class, 'addCity'])->name('city.add');
     });
+
     Route::prefix('location')->group(function () {
         Route::post("/add", [CityLocationController::class, 'addLocation'])->name('location.add');
     });

@@ -10,7 +10,23 @@
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
             <h1 class="h3 mb-0 text-gray-800">Add New Donor</h1>
         </div>
-
+        @if (session()->has('message'))
+            <div class="alert alert-info alert-dismissible fade show" role="alert">
+                {{ session('message') }}
+                <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+        @endif
+        @if ($errors->any())
+            <div class="alert alert-danger">
+                <ul>
+                    @foreach ($errors->all() as $error)
+                        <li>{{ $error }}</li>
+                    @endforeach
+                </ul>
+            </div>
+        @endif
         <!-- Content Row -->
 
         <div class="row">
@@ -24,31 +40,35 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
-                        <form action="">
+                        <form action="{{ route('add.donor') }}" method="POST">
+                            @csrf
                             <div class="row">
                                 <div class="col-md-6">
                                     <div class="form-group">
                                         <label class="font-weight-bolder" class="font-weight-bolder"
-                                            for="">Name</label>
-                                        <input type="text" class="form-control" placeholder="Enter Your FullName" name="donor_name">
+                                            for="fullname">Name <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" placeholder="Enter Your FullName"
+                                            name="fullname" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="font-weight-bolder" for="">Phone</label>
-                                        <input type="text" class="form-control" placeholder="Enter Your Phone" name="donor_phone">
+                                        <label class="font-weight-bolder" for="phone">Phone <span class="text-danger">*</span></label>
+                                        <input type="tel" class="form-control" placeholder="Enter Your Phone"
+                                            name="phone" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="font-weight-bolder" for="">Email</label>
-                                        <input type="email" class="form-control" placeholder="Enter Your Email" name="donor_email">
+                                        <label class="font-weight-bolder" for="">Email <span class="text-danger">*</span></label>
+                                        <input type="email" class="form-control" placeholder="Enter Your Email"
+                                            name="email" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="font-weight-bolder" for="">Blood Group</label>
-                                        <select name="donor_blood_group" class="form-control">
+                                        <label class="font-weight-bolder" for="">Blood Group <span class="text-danger">*</span></label>
+                                        <select name="blood_group" class="form-control" required>
                                             <option disabled selected>Select Blood Group</option>
                                             @foreach ($bloods as $blood)
                                                 <option value="{{ $blood->id }}">{{ $blood->blood_group }}</option>
@@ -58,8 +78,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="font-weight-bolder" for="">Gender</label>
-                                        <select class="form-control" name="donor_gender" id="">
+                                        <label class="font-weight-bolder" for="">Gender <span class="text-danger">*</span></label>
+                                        <select class="form-control" name="gender" id="" required>
                                             <option selected disabled>Select a Gender</option>
                                             <option value="Male">Male</option>
                                             <option value="Female">Female</option>
@@ -70,14 +90,22 @@
 
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="font-weight-bolder" for="">Date of Birth</label>
-                                        <input type="date" class="form-control" name="donor_dob">
+                                        <label class="font-weight-bolder" for="">Profession <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" placeholder="Enter Your Profession"
+                                            name="profession" required>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label class="font-weight-bolder" for="">Date of Birth <span class="text-danger">*</span></label>
+                                        <input type="date" class="form-control" name="date_of_birth" required>
                                     </div>
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="font-weight-bolder" for="">City</label>
-                                        <select name="donor_city" class="form-control">
+                                        <label class="font-weight-bolder" for="">City <span class="text-danger">*</span></label>
+                                        <select name="city" class="form-control" required>
                                             <option disabled selected>Select City</option>
                                             @foreach ($cities as $city)
                                                 <option value="{{ $city->id }}">{{ $city->city_name }}</option>
@@ -87,8 +115,8 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="font-weight-bolder" for="">Location</label>
-                                        <select name="donor_location" class="form-control">
+                                        <label class="font-weight-bolder" for="">Location <span class="text-danger">*</span></label>
+                                        <select name="location" class="form-control" required>
                                             <option disabled selected>Select Location</option>
                                             @foreach ($locations as $location)
                                                 <option value="{{ $location->id }}">{{ $location->location_name }}</option>
@@ -98,8 +126,9 @@
                                 </div>
                                 <div class="col-md-6">
                                     <div class="form-group">
-                                        <label class="font-weight-bolder" for="">Address</label>
-                                        <input type="text" class="form-control" placeholder="Enter Your Address" name="donor_address">
+                                        <label class="font-weight-bolder" for="">Address <span class="text-danger">*</span></label>
+                                        <input type="text" class="form-control" placeholder="Enter Your Address"
+                                            name="address" required>
                                     </div>
                                 </div>
                                 <div class="col-md-12">
