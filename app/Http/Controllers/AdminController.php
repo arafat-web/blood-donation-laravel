@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Blood;
 use App\Models\City;
+use App\Models\Donor;
 use App\Models\Location;
 use Illuminate\Http\Request;
 
@@ -26,7 +27,15 @@ class AdminController extends Controller
     }
     public function donorList()
     {
-        return view('admin.donor-list');
+        // $donors = Donor::join();
+        $donors = Donor::join('bloods', 'donors.blood_group', '=', 'bloods.id')
+            ->join('cities', 'donors.city', '=', 'cities.id')
+            ->join('locations', 'donors.location', '=', 'locations.id')
+            ->select('donors.*', 'bloods.blood_group as blood_group_name', 'cities.city_name as city_name', 'locations.location_name as location_name')
+            ->orderBy('donors.id', 'DESC')
+            ->get();
+
+        return view('admin.donor-list', compact('donors'));
     }
     public function locationSettings()
     {

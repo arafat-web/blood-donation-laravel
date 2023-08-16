@@ -18,7 +18,7 @@
                                 <h4 class="m-0 font-weight-bold text-danger">All Donor List</h4>
                             </div>
                             <div class="col-6 text-right">
-                                <a href="{{route('add.donor')}}" class="btn btn-danger">Add Donor</a>
+                                <a href="{{ route('add.donor') }}" class="btn btn-danger">Add Donor</a>
                             </div>
                         </div>
 
@@ -33,25 +33,31 @@
                                         <th>Location</th>
                                         <th>Phone</th>
                                         <th>Email</th>
+                                        <th>Status</th>
                                         <th>Added Date</th>
                                         <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    <tr>
-                                        <td>Tiger Nixon</td>
-                                        <td>A+</td>
-                                        <td>Dhaka, Bangladesh</td>
-                                        <td>01789404345</td>
-                                        <td>Arafat@gmail.com</td>
-                                        <td>2011/04/25</td>
-                                        <th>
-                                            <a href="#" class="btn-sm btn-info">View</a>
-                                            <a href="#" class="btn-sm btn-warning">Edit</a>
-                                            <a href="#" class="btn-sm btn-danger">Delete</a>
-                                        </th>
+                                    @foreach ($donors as $donor)
+                                        <tr>
+                                            <td>{{ $donor->fullname }}</td>
+                                            <td>{{ $donor->blood_group_name }}</td>
+                                            <td>{{ $donor->city_name }} {{ $donor->location_name }}</td>
+                                            <td>{{ $donor->phone }}</td>
+                                            <td>{{ $donor->email }}</td>
+                                            <td>
+                                                {{ $donor->active_status == 0 ? 'Inactive' : 'Active' }}
+                                            </td>
+                                            <td>{{ $donor->created_at }}</td>
+                                            <th>
+                                                <a href="#" class="btn-sm btn-info">View</a>
+                                                <a href="#" class="btn-sm btn-warning">Edit</a>
+                                                <a href="#" class="btn-sm btn-danger">Delete</a>
+                                            </th>
+                                        </tr>
+                                    @endforeach
 
-                                    </tr>
                                 </tbody>
                             </table>
                         </div>
