@@ -60,13 +60,7 @@
         Miscellaneous
     </div>
     <li class="nav-item">
-        <a class="nav-link" href="#">
-            <i class="fas fa-fw fa-table"></i>
-            <span>Profile</span></a>
-    </li>
-
-    <li class="nav-item">
-        <a class="nav-link" href="#">
+        <a class="nav-link" href="{{route('logout')}}">
             <i class="fas fa-fw fa-table"></i>
             <span>Logout</span></a>
     </li>

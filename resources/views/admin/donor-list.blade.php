@@ -49,11 +49,9 @@
                                             <td>
                                                 {{ $donor->active_status == 0 ? 'Inactive' : 'Active' }}
                                             </td>
-                                            <td>{{ $donor->created_at }}</td>
+                                            <td>{{ $donor->created_at->format('d-m-y') }}</td>
                                             <th>
-                                                <a href="#" class="btn-sm btn-info">View</a>
-                                                <a href="#" class="btn-sm btn-warning">Edit</a>
-                                                <a href="#" class="btn-sm btn-danger">Delete</a>
+                                                <a href="{{ route('delete.request', ['id'=> $donor->id]) }}" class="btn-sm btn-danger">Delete</a>
                                             </th>
                                         </tr>
                                     @endforeach

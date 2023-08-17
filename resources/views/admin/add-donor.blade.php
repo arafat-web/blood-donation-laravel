@@ -40,7 +40,7 @@
                     </div>
                     <!-- Card Body -->
                     <div class="card-body">
-                        <form action="{{ route('add.donor') }}" method="POST">
+                        <form action="{{ route('add.new.donor') }}" method="POST">
                             @csrf
                             <div class="row">
                                 <div class="col-md-6">
@@ -131,6 +131,9 @@
                                             name="address" required>
                                     </div>
                                 </div>
+
+                                <input type="hidden" name="active_status" value="1">
+                                <input type="hidden" name="status" value="1">
                                 <div class="col-md-12">
                                     <div class="form-group text-center">
                                         <button type="submit" class="btn btn-primary">Save</button>

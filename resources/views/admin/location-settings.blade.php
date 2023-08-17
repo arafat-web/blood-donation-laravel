@@ -41,7 +41,6 @@
                                     <tr>
                                         <th>SL</th>
                                         <th>Name</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
 
@@ -53,11 +52,6 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td> {{ $city->city_name }} </td>
-                                            <td>
-                                                <a href="#" class="btn-sm btn-info">View</a>
-                                                <a href="#" class="btn-sm btn-warning">Edit</a>
-                                                <a href="#" class="btn-sm btn-danger">Delete</a>
-                                            </td>
                                         </tr>
                                     @endforeach
 
@@ -89,7 +83,6 @@
                                     <tr>
                                         <th>SL</th>
                                         <th>Name</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
 
@@ -101,11 +94,6 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td> {{ $location->location_name }} </td>
-                                            <td>
-                                                <a href="#" class="btn-sm btn-info">View</a>
-                                                <a href="#" class="btn-sm btn-warning">Edit</a>
-                                                <a href="#" class="btn-sm btn-danger">Delete</a>
-                                            </td>
                                         </tr>
                                     @endforeach
 

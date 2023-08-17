@@ -41,9 +41,7 @@
                                     <tr>
                                         <th>SL</th>
                                         <th>Group</th>
-                                        <th>Total Donor</th>
                                         <th>Added Date</th>
-                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
@@ -54,16 +52,9 @@
                                         <tr>
                                             <td>{{ ++$i }}</td>
                                             <td>{{ $item->blood_group }}</td>
-                                            <td>11</td>
                                             <td>{{ $item->created_at->format('d-m-Y')}}</td>
-                                            <td>
-                                                <a href="#" class="btn-sm btn-info"><i class="fas fa-eye"></i></a>
-                                                <a href="#" class="btn-sm btn-warning"><i class="fas fa-edit"></i></a>
-                                                <a href="#" class="btn-sm btn-danger"><i class="fas fa-trash"></i></a>
-                                            </td>
                                         </tr>
                                     @endforeach
-
                                 </tbody>
                             </table>
                         </div>

@@ -32,53 +32,41 @@
                         <h4 style="font-family: Merriweather, serif;" class="card-header font-weight-bold">Search Donors
                         </h4>
                         <div class="card-body">
-                            <form class="form-body" action="{{route('search.donor')}}">
+                            <form class="form-body" action="{{ route('search.donor') }}" method="POST">
+                                @csrf
                                 <div class="input-group mb-3">
-                                    <select class="custom-select small" id="bloodgroup">
+                                    <select class="custom-select small" name="blood_group">
                                         <option disabled selected>Select Blood Group</option>
                                         @foreach ($groups as $group)
-                                        <option value="{{$group->id}}">{{$group->blood_group}}</option>
+                                            <option value="{{ $group->id }}">{{ $group->blood_group }}</option>
                                         @endforeach
                                     </select>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <select class="custom-select small select-2" id="city">
+                                    <select class="custom-select small select-2" name="city">
                                         <option disabled selected>Select City</option>
-                                        <option value="1">Dhaka</option>
-                                        <option value="2">Rajshahi</option>
-                                        <option value="3">Chottogram</option>
-                                        <option value="4">Barishal</option>
-                                        <option value="5">Khulna</option>
-                                        <option value="6">Sylhet</option>
-                                        <option value="7">Rangpur</option>
-                                        <option value="8">Mymensing</option>
+                                        @foreach ($cities as $city)
+                                            <option value="{{ $city->id }}">{{ $city->city_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <select class="custom-select small select-2" id="location">
+                                    <select class="custom-select small select-2" name="location">
                                         <option disabled selected>Select Location</option>
-                                        <option value="1">Dhaka</option>
-                                        <option value="2">Rajshahi</option>
-                                        <option value="3">Chottogram</option>
-                                        <option value="4">Barishal</option>
-                                        <option value="5">Khulna</option>
-                                        <option value="6">Sylhet</option>
-                                        <option value="7">Rangpur</option>
-                                        <option value="8">Mymensing</option>
+                                        @foreach ($locations as $location)
+                                            <option value="{{ $location->id }}">{{ $location->location_name }}</option>
+                                        @endforeach
                                     </select>
                                 </div>
                                 <div class="input-group mb-3">
-                                    <select class="custom-select small" id="type">
+                                    <select class="custom-select small" name="gender">
                                         <option disabled selected>Select Donor Type</option>
-                                        <option value="1">Male</option>
-                                        <option value="2">Female</option>
+                                        <option value="Male">Male</option>
+                                        <option value="Female">Female</option>
+                                        <option value="Others">Others</option>
                                     </select>
                                 </div>
-
-                                <div class="input-group mb-3">
-                                    <input type="date" id="date" class="form-control small" />
-                                </div>
-                                <button class="btn btn-danger w-100">Search Donor</button>
+                                <button type="submit" class="btn btn-danger w-100">Search Donor</button>
                             </form>
 
                         </div>
@@ -113,7 +101,7 @@
                         also the leap into electronic typesetting, remaining essentially unchanged.</p>
                 </div>
                 <div class="col-md-6 image">
-                    <img src="{{asset('client')}}/assets/images/about.jpg" alt="">
+                    <img src="{{ asset('client') }}/assets/images/about.jpg" alt="">
                 </div>
             </div>
         </div>
@@ -131,7 +119,7 @@
             <div class="row">
                 <div class="col-md-3 col-sm-6 vd">
                     <div class="bkjiu border">
-                        <img src="{{asset('client')}}/assets/images/gallery/g1.jpg" alt="">
+                        <img src="{{ asset('client') }}/assets/images/gallery/g1.jpg" alt="">
                         <h3 class="mt-2 text-danger"><b>1 - </b>Registration</h3>
                         <p>Ut wisi enim ad minim veniam, quis laore nostrud exerci tation ulm hedi corper turet suscipit
                             lobortis</p>
@@ -139,7 +127,7 @@
                 </div>
                 <div class="col-md-3 col-sm-6 vd">
                     <div class="bkjiu border">
-                        <img src="{{asset('client')}}/assets/images/gallery/g2.jpg" alt="">
+                        <img src="{{ asset('client') }}/assets/images/gallery/g2.jpg" alt="">
                         <h3 class="mt-2 text-danger"><b>2 - </b>Seeing</h3>
                         <p>Ut wisi enim ad minim veniam, quis laore nostrud exerci tation ulm hedi corper turet suscipit
                             lobortis</p>
@@ -148,7 +136,7 @@
                 </div>
                 <div class="col-md-3 col-sm-6 vd">
                     <div class="bkjiu border">
-                        <img src="{{asset('client')}}/assets/images/gallery/g3.jpg" alt="">
+                        <img src="{{ asset('client') }}/assets/images/gallery/g3.jpg" alt="">
                         <h3 class="mt-2 text-danger"><b>3 - </b>Donation</h3>
                         <p>Ut wisi enim ad minim veniam, quis laore nostrud exerci tation ulm hedi corper turet suscipit
                             lobortis</p>
@@ -157,7 +145,7 @@
                 </div>
                 <div class="col-md-3 col-sm-6 vd ">
                     <div class="bkjiu border">
-                        <img src="{{asset('client')}}/assets/images/gallery/g4.jpg" alt="">
+                        <img src="{{ asset('client') }}/assets/images/gallery/g4.jpg" alt="">
                         <h3 class="mt-2 text-danger"><b>4 - </b>Save Life</h3>
                         <p>Ut wisi enim ad minim veniam, quis laore nostrud exerci tation ulm hedi corper turet suscipit
                             lobortis</p>
@@ -175,23 +163,18 @@
 
             <div id="counters" class="row p-2">
                 <!-- <div class="row"> -->
-                <div class="counter-div text-center mt-0 mt-lg-5 col-lg-3 col-md-6 col-6">
-                    <div class="counter text-white" data-TargetNum="8" data-Speed="2000">0</div>
+                <div class="counter-div text-center mt-0 mt-lg-5 col-md-4">
+                    <div class="counter text-white" data-TargetNum="{{$group_count}}" data-Speed="2000">0</div>
                     <div class="text-white">Total Groups</div>
                 </div>
 
-                <div class="counter-div text-center mt-0 mt-lg-5 col-lg-3 col-md-6 col-6">
-                    <div class="counter text-white" data-TargetNum="65" data-Speed="2000">0</div>
+                <div class="counter-div text-center mt-0 mt-lg-5 col-md-4">
+                    <div class="counter text-white" data-TargetNum="{{$location_count}}" data-Speed="2000">0</div>
                     <div class="text-white">Locations</div>
                 </div>
-                <div class="counter-div text-center mt-3 mt-lg-5  col-lg-3 col-md-6 col-6">
-                    <div class="counter text-white" data-TargetNum="2684" data-Speed="2000">0</div>
+                <div class="counter-div text-center mt-3 mt-lg-5 col-md-4">
+                    <div class="counter text-white" data-TargetNum="{{$donor_count}}" data-Speed="2000">0</div>
                     <div class="text-white">Total Donor</div>
-                </div>
-
-                <div class="counter-div text-center mt-3 mt-lg-5 col-lg-3 col-md-6 col-6">
-                    <div class="counter text-white" data-TargetNum="6783" data-Speed="2000">0</div>
-                    <div class="text-white">Donations</div>
                 </div>
             </div>
             <!-- </div> -->
@@ -208,94 +191,23 @@
                     est arcu. Donec hendrerit velit consectetur adipiscing elit.</p>
             </div>
             <div class="row">
+                @foreach ($donors as $donor)
+                    
+               
                 <div class="col-lg-3 mb-5">
                     <div class="card">
-                        <img class="card-img-top doner-img" src="{{asset('client')}}/assets/images/man.jpg" alt="Card image cap">
+                        <img class="card-img-top doner-img" src="{{ asset('client') }}/assets/images/man.jpg"
+                            alt="Card image cap">
                         <div class="card-body bg-danger text-white text-center">
-                            <h5 class="card-text">Lorem Ipsum</h5>
-                            <p class="card-text small">Blood Group: (B+)</p>
-                            <p class="card-text small">Total Donate: 10</p>
-                            <button class="btn mt-2 btn-sm btn-outline-light">View Profile</button>
+                            <h5 class="card-text">{{$donor->fullname}}</h5>
+                            <p class="card-text small">Blood Group: ({{$donor->blood_group_name}})</p>
+                            <p class="card-text small">{{$donor->location_name . ', ' . $donor->city_name}}</p>
+                            <button class="btn mt-2 btn-sm btn-outline-light"><a class="text-white" href="{{ route('donor.profile', ['id'=> $donor->donor_id]) }}"> View
+                                Profile</a></button>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-3 mb-5">
-                    <div class="card">
-                        <img class="card-img-top doner-img" src="{{asset('client')}}/assets/images/man.jpg" alt="Card image cap">
-                        <div class="card-body bg-danger text-white text-center">
-                            <h5 class="card-text">Lorem Ipsum</h5>
-                            <p class="card-text small">Blood Group: (B+)</p>
-                            <p class="card-text small">Total Donate: 10</p>
-                            <button class="btn mt-2 btn-sm btn-outline-light">View Profile</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-5">
-                    <div class="card">
-                        <img class="card-img-top doner-img" src="{{asset('client')}}/assets/images/man.jpg" alt="Card image cap">
-                        <div class="card-body bg-danger text-white text-center">
-                            <h5 class="card-text">Lorem Ipsum</h5>
-                            <p class="card-text small">Blood Group: (B+)</p>
-                            <p class="card-text small">Total Donate: 10</p>
-                            <button class="btn mt-2 btn-sm btn-outline-light">View Profile</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-5">
-                    <div class="card">
-                        <img class="card-img-top doner-img" src="{{asset('client')}}/assets/images/man.jpg" alt="Card image cap">
-                        <div class="card-body bg-danger text-white text-center">
-                            <h5 class="card-text">Lorem Ipsum</h5>
-                            <p class="card-text small">Blood Group: (B+)</p>
-                            <p class="card-text small">Total Donate: 10</p>
-                            <button class="btn mt-2 btn-sm btn-outline-light">View Profile</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-5">
-                    <div class="card">
-                        <img class="card-img-top doner-img" src="{{asset('client')}}/assets/images/man.jpg" alt="Card image cap">
-                        <div class="card-body bg-danger text-white text-center">
-                            <h5 class="card-text">Lorem Ipsum</h5>
-                            <p class="card-text small">Blood Group: (B+)</p>
-                            <p class="card-text small">Total Donate: 10</p>
-                            <button class="btn mt-2 btn-sm btn-outline-light">View Profile</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-5">
-                    <div class="card">
-                        <img class="card-img-top doner-img" src="{{asset('client')}}/assets/images/man.jpg" alt="Card image cap">
-                        <div class="card-body bg-danger text-white text-center">
-                            <h5 class="card-text">Lorem Ipsum</h5>
-                            <p class="card-text small">Blood Group: (B+)</p>
-                            <p class="card-text small">Total Donate: 10</p>
-                            <button class="btn mt-2 btn-sm btn-outline-light">View Profile</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-5">
-                    <div class="card">
-                        <img class="card-img-top doner-img" src="{{asset('client')}}/assets/images/man.jpg" alt="Card image cap">
-                        <div class="card-body bg-danger text-white text-center">
-                            <h5 class="card-text">Lorem Ipsum</h5>
-                            <p class="card-text small">Blood Group: (B+)</p>
-                            <p class="card-text small">Total Donate: 10</p>
-                            <button class="btn mt-2 btn-sm  btn-outline-light">View Profile</button>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-3 mb-5">
-                    <div class="card">
-                        <img class="card-img-top doner-img" src="{{asset('client')}}/assets/images/man.jpg" alt="Card image cap">
-                        <div class="card-body bg-danger text-white text-center">
-                            <h5 class="card-text">Lorem Ipsum</h5>
-                            <p class="card-text small">Blood Group: (B+)</p>
-                            <p class="card-text small">Total Donate: 10</p>
-                            <button class="btn mt-2 btn-sm btn-outline-light">View Profile</button>
-                        </div>
-                    </div>
-                </div>
+                @endforeach
             </div>
         </div>
     </div>

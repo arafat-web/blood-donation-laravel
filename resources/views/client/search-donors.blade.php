@@ -20,72 +20,52 @@
         <div class="container">
             <!-- SEARCH CONTROL START -->
             <div class="search-control border bg-white p-4">
-                <form class="row" action="{{route('search.donor')}}">
+                <form class="row" action="{{ route('search.donor') }}" method="POST">
                     <div class="col-lg-2">
                         <div class="form-group mb-3">
                             <label for="bloodgroup" class="small">Blood Group</label>
                             <select class="custom-select small" id="bloodgroup">
                                 <option disabled selected>Select One</option>
-                                <option value="1">A+</option>
-                                <option value="2">A-</option>
-                                <option value="3">B+</option>
-                                <option value="4">B-</option>
-                                <option value="5">AB+</option>
-                                <option value="6">AB-</option>
-                                <option value="7">O+</option>
-                                <option value="8">O-</option>
+                                @foreach ($bloods as $blood)
+                                    <option value="{{ $blood->id }}">{{ $blood->blood_group }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <div class="form-group mb-3">
                             <label for="city" class="small">City</label>
                             <select class="custom-select small" id="city">
                                 <option disabled selected>Select One</option>
-                                <option value="1">Dhaka</option>
-                                <option value="2">Rajshahi</option>
-                                <option value="3">Chottogram</option>
-                                <option value="4">Barishal</option>
-                                <option value="5">Khulna</option>
-                                <option value="6">Sylhet</option>
-                                <option value="7">Rangpur</option>
-                                <option value="8">Mymensing</option>
+                                @foreach ($cities as $city)
+                                    <option value="{{ $city->id }}">{{ $city->city_name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <div class="form-group mb-3">
                             <label for="location" class="small">Location</label>
                             <select class="custom-select small" id="location">
                                 <option disabled selected>Select One</option>
-                                <option value="1">Dhaka</option>
-                                <option value="2">Rajshahi</option>
-                                <option value="3">Chottogram</option>
-                                <option value="4">Barishal</option>
-                                <option value="5">Khulna</option>
-                                <option value="6">Sylhet</option>
-                                <option value="7">Rangpur</option>
-                                <option value="8">Mymensing</option>
+                                @foreach ($locations as $location)
+                                    <option value="{{ $location->id }}">{{ $location->location_name }}</option>
+                                @endforeach
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-2">
+                    <div class="col-lg-3">
                         <div class="form-group mb-3">
                             <label for="type" class="small">Donor Type</label>
                             <select class="custom-select small" id="type">
                                 <option disabled selected>Select One</option>
-                                <option value="1">Male</option>
-                                <option value="2">Female</option>
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option value="Others">Others</option>
                             </select>
                         </div>
                     </div>
-                    <div class="col-lg-2">
-                        <div class="form-group mb-3 ">
-                            <label for="date" class="small">Date</label>
-                            <input type="date" id="date" class="form-control small" list="location" />
-                        </div>
-                    </div>
-                    <div class="col-lg-2 mt-lg-4 pt-2">
+                    <div class="col-lg-1 mt-lg-4 pt-2">
                         <button type="submit" class="btn btn-danger">Search</button>
                     </div>
                 </form>
@@ -102,6 +82,9 @@
                     </div>
 
 
+                    @foreach ($results as $result)
+                        
+                    @endforeach
                     <li class="bg-white border p-4 mt-2">
                         <div class="row">
                             <div class="col-lg-3 mb-2 mb-lg-0">
@@ -109,7 +92,7 @@
                                     Name:
                                 </div>
                                 <div class="">
-                                    Lorem Ipsum
+                                    {{$result->fullname}}
                                 </div>
                             </div>
                             <div class="col-lg-3  mb-2 mb-lg-0">
@@ -117,7 +100,7 @@
                                     Group:
                                 </div>
                                 <div class="">
-                                    B+
+                                    {{$result->blood_group_name}}
                                 </div>
                             </div>
                             <div class="col-lg-3 mb-2 mb-lg-0">
@@ -125,314 +108,18 @@
                                     Location:
                                 </div>
                                 <div class="">
-                                    <span>Dhaka</span>
+                                    <span> {{$result->location_name . ", " . $result->city_name}}</span>
                                 </div>
                             </div>
                             <div class="col-lg-3 mb-2 mb-lg-0">
-                                <button class="btn btn-sm btn-primary ml-2"><a class="text-white" href="profile.html"> View
+                                <button class="btn btn-sm btn-primary ml-2"><a class="text-white" href="{{ route('donor.profile', ['id'=> $result->donor_id]) }}"> View
                                         Profile</a></button>
                             </div>
                         </div>
                     </li>
 
-                    <li class="bg-white border p-4 mt-2">
-                        <div class="row">
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Name:
-                                </div>
-                                <div class="">
-                                    Lorem Ipsum
-                                </div>
-                            </div>
-                            <div class="col-lg-3  mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Group:
-                                </div>
-                                <div class="">
-                                    B+
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Location:
-                                </div>
-                                <div class="">
-                                    <span>Dhaka</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <button class="btn btn-sm btn-primary ml-2"><a class="text-white" href="profile.html">
-                                        View Profile</a></button>
-                            </div>
-                        </div>
-                    </li>
 
-                    <li class="bg-white border p-4 mt-2">
-                        <div class="row">
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Name:
-                                </div>
-                                <div class="">
-                                    Lorem Ipsum
-                                </div>
-                            </div>
-                            <div class="col-lg-3  mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Group:
-                                </div>
-                                <div class="">
-                                    B+
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Location:
-                                </div>
-                                <div class="">
-                                    <span>Dhaka</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <button class="btn btn-sm btn-primary ml-2"><a class="text-white" href="profile.html">
-                                        View Profile</a></button>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="bg-white border p-4 mt-2">
-                        <div class="row">
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Name:
-                                </div>
-                                <div class="">
-                                    Lorem Ipsum
-                                </div>
-                            </div>
-                            <div class="col-lg-3  mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Group:
-                                </div>
-                                <div class="">
-                                    B+
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Location:
-                                </div>
-                                <div class="">
-                                    <span>Dhaka</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <button class="btn btn-sm btn-primary ml-2"><a class="text-white" href="profile.html">
-                                        View Profile</a></button>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="bg-white border p-4 mt-2">
-                        <div class="row">
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Name:
-                                </div>
-                                <div class="">
-                                    Lorem Ipsum
-                                </div>
-                            </div>
-                            <div class="col-lg-3  mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Group:
-                                </div>
-                                <div class="">
-                                    B+
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Location:
-                                </div>
-                                <div class="">
-                                    <span>Dhaka</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <button class="btn btn-sm btn-primary ml-2"><a class="text-white" href="profile.html">
-                                        View Profile</a></button>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="bg-white border p-4 mt-2">
-                        <div class="row">
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Name:
-                                </div>
-                                <div class="">
-                                    Lorem Ipsum
-                                </div>
-                            </div>
-                            <div class="col-lg-3  mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Group:
-                                </div>
-                                <div class="">
-                                    B+
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Location:
-                                </div>
-                                <div class="">
-                                    <span>Dhaka</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <button class="btn btn-sm btn-primary ml-2"><a class="text-white" href="profile.html">
-                                        View Profile</a></button>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="bg-white border p-4 mt-2">
-                        <div class="row">
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Name:
-                                </div>
-                                <div class="">
-                                    Lorem Ipsum
-                                </div>
-                            </div>
-                            <div class="col-lg-3  mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Group:
-                                </div>
-                                <div class="">
-                                    B+
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Location:
-                                </div>
-                                <div class="">
-                                    <span>Dhaka</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <button class="btn btn-sm btn-primary ml-2"><a class="text-white" href="profile.html">
-                                        View Profile</a></button>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="bg-white border p-4 mt-2">
-                        <div class="row">
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Name:
-                                </div>
-                                <div class="">
-                                    Lorem Ipsum
-                                </div>
-                            </div>
-                            <div class="col-lg-3  mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Group:
-                                </div>
-                                <div class="">
-                                    B+
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Location:
-                                </div>
-                                <div class="">
-                                    <span>Dhaka</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <button class="btn btn-sm btn-primary ml-2"><a class="text-white" href="profile.html">
-                                        View Profile</a></button>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="bg-white border p-4 mt-2">
-                        <div class="row">
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Name:
-                                </div>
-                                <div class="">
-                                    Lorem Ipsum
-                                </div>
-                            </div>
-                            <div class="col-lg-3  mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Group:
-                                </div>
-                                <div class="">
-                                    B+
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Location:
-                                </div>
-                                <div class="">
-                                    <span>Dhaka</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <button class="btn btn-sm btn-primary ml-2"><a class="text-white" href="profile.html">
-                                        View Profile</a></button>
-                            </div>
-                        </div>
-                    </li>
-
-                    <li class="bg-white border p-4 mt-2">
-                        <div class="row">
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Name:
-                                </div>
-                                <div class="">
-                                    Lorem Ipsum
-                                </div>
-                            </div>
-                            <div class="col-lg-3  mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Group:
-                                </div>
-                                <div class="">
-                                    B+
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <div class="text-secondary small">
-                                    Location:
-                                </div>
-                                <div class="">
-                                    <span>Dhaka</span>
-                                </div>
-                            </div>
-                            <div class="col-lg-3 mb-2 mb-lg-0">
-                                <button class="btn btn-sm btn-primary ml-2"><a class="text-white" href="profile.html">
-                                        View Profile</a></button>
-                            </div>
-                        </div>
-                    </li>
-
-                    <nav class="mt-4" aria-label="Page navigation ">
+                    {{-- <nav class="mt-4" aria-label="Page navigation ">
                         <ul class="pagination justify-content-center">
                             <li class="page-item disabled">
                                 <a class="page-link" href="#" tabindex="-1">Previous</a>
@@ -444,7 +131,7 @@
                                 <a class="page-link" href="#">Next</a>
                             </li>
                         </ul>
-                    </nav>
+                    </nav> --}}
                 </ul>
             </div>
             <!-- SEARCH RESULT END -->

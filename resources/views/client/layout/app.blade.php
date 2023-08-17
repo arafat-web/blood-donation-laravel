@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="{{ asset('client') }}/assets/plugins/grid-gallery/css/grid-gallery.min.css">
     <link rel="stylesheet" href="{{ asset('client') }}/assets/css/counter.css">
     <link rel="stylesheet" type="text/css" href="{{ asset('client') }}/assets/css/style.css" />
-
+    <script src="{{ asset('client') }}/assets/js/jquery-3.2.1.min.js"></script>
 </head>
 
 <body>
