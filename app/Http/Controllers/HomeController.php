@@ -60,6 +60,8 @@ class HomeController extends Controller
         $location = $request->location;
         $gender = $request->gender;
 
+        $formData = $request->all();
+
         $results = Donor::join('bloods', 'donors.blood_group', '=', 'bloods.id')
             ->join('cities', 'donors.city', '=', 'cities.id')
             ->join('locations', 'donors.location', '=', 'locations.id')
@@ -77,8 +79,8 @@ class HomeController extends Controller
         $cities = City::orderBy('id', 'DESC')->get();
         $locations = Location::orderBy('id', 'DESC')->get();
 
-        return view('client.search-donors', compact('results', 'bloods', 'cities', 'locations'));
-        // return $results;
+        return view('client.search-donors', compact('results', 'bloods', 'cities', 'locations', 'formData'));
+        // return $formData;
     }
 
     public function donorProfile($id)

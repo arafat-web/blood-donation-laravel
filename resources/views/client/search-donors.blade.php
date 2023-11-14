@@ -20,14 +20,15 @@
         <div class="container">
             <!-- SEARCH CONTROL START -->
             <div class="search-control border bg-white p-4">
-                <form class="row" action="{{ route('search.donor') }}" method="POST">
+                <form class="row" method="POST" action="{{ route('search.donor') }}">
+                    @csrf
                     <div class="col-lg-2">
                         <div class="form-group mb-3">
                             <label for="bloodgroup" class="small">Blood Group</label>
-                            <select class="custom-select small" id="bloodgroup">
-                                <option disabled selected>Select One</option>
+                            <select class="custom-select small" id="bloodgroup" name="blood_group">
+                                <option disabled>Select One</option>
                                 @foreach ($bloods as $blood)
-                                    <option value="{{ $blood->id }}">{{ $blood->blood_group }}</option>
+                                    <option value="{{ $blood->id }}" {{ $formData['blood_group'] == $blood->id ? 'selected': ''}}>{{ $blood->blood_group }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -35,10 +36,10 @@
                     <div class="col-lg-3">
                         <div class="form-group mb-3">
                             <label for="city" class="small">City</label>
-                            <select class="custom-select small" id="city">
-                                <option disabled selected>Select One</option>
+                            <select class="custom-select small" id="city" name="city">
+                                <option disabled>Select One</option>
                                 @foreach ($cities as $city)
-                                    <option value="{{ $city->id }}">{{ $city->city_name }}</option>
+                                    <option value="{{ $city->id }}" {{ $formData['city'] == $city->id ? 'selected': ''}}>{{ $city->city_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -46,10 +47,10 @@
                     <div class="col-lg-3">
                         <div class="form-group mb-3">
                             <label for="location" class="small">Location</label>
-                            <select class="custom-select small" id="location">
-                                <option disabled selected>Select One</option>
+                            <select class="custom-select small" id="location" name="location">
+                                <option disabled>Select One</option>
                                 @foreach ($locations as $location)
-                                    <option value="{{ $location->id }}">{{ $location->location_name }}</option>
+                                    <option value="{{ $location->id }}" {{ $formData['location'] == $location->id ? 'selected': ''}}>{{ $location->location_name }}</option>
                                 @endforeach
                             </select>
                         </div>
@@ -57,11 +58,11 @@
                     <div class="col-lg-3">
                         <div class="form-group mb-3">
                             <label for="type" class="small">Donor Type</label>
-                            <select class="custom-select small" id="type">
-                                <option disabled selected>Select One</option>
-                                <option value="Male">Male</option>
-                                <option value="Female">Female</option>
-                                <option value="Others">Others</option>
+                            <select class="custom-select small" id="type" name="gender">
+                                <option disabled>Select One</option>
+                                <option value="Male" {{ $formData['gender'] == 'Male' ? 'selected': ''}}>Male</option>
+                                <option value="Female" {{ $formData['gender'] == 'Female' ? 'selected': ''}}>Female</option>
+                                <option value="Others" {{ $formData['gender'] == 'Others' ? 'selected': ''}}>Others</option>
                             </select>
                         </div>
                     </div>
@@ -82,9 +83,12 @@
                     </div>
 
 
-                    @foreach ($results as $result)
-                        
-                    @endforeach
+                    @if (count($results) == 0)
+                        <div class="alert alert-danger mt-5" role="alert">
+                            No Donor Found!
+                        </div>
+                    @endif
+                    @foreach ($results as $result) 
                     <li class="bg-white border p-4 mt-2">
                         <div class="row">
                             <div class="col-lg-3 mb-2 mb-lg-0">
@@ -117,7 +121,7 @@
                             </div>
                         </div>
                     </li>
-
+                    @endforeach
 
                     {{-- <nav class="mt-4" aria-label="Page navigation ">
                         <ul class="pagination justify-content-center">

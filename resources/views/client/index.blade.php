@@ -32,7 +32,7 @@
                         <h4 style="font-family: Merriweather, serif;" class="card-header font-weight-bold">Search Donors
                         </h4>
                         <div class="card-body">
-                            <form class="form-body" action="{{ route('search.donor') }}" method="POST">
+                            <form class="form-body" method="POST" action="{{ route('search.donor') }}" >
                                 @csrf
                                 <div class="input-group mb-3">
                                     <select class="custom-select small" name="blood_group">
