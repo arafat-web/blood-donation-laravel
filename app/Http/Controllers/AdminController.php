@@ -12,16 +12,14 @@ class AdminController extends Controller
 {
     public function index()
     {
-        if (Auth::check()) {
-            $total = Donor::all()->count();
-            $active = Donor::where('active_status', 1)->get()->count();
-            $inactive = Donor::where('active_status', 0)->get()->count();
-            $request = Donor::where('status', 0)->get()->count();
 
-            return view('admin.index', compact('total', 'active', 'inactive', 'request'));
-        }
+        $total = Donor::all()->count();
+        $active = Donor::where('active_status', 1)->get()->count();
+        $inactive = Donor::where('active_status', 0)->get()->count();
+        $request = Donor::where('status', 0)->get()->count();
 
-        return redirect('login')->withSuccess('Opps! You do not have access');
+        return view('admin.index', compact('total', 'active', 'inactive', 'request'));
+
     }
 
     public function addDonor()

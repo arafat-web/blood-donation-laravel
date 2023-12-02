@@ -23,8 +23,18 @@ class LoginController extends Controller
 
         $credentials = $request->only('email', 'password');
         if (Auth::attempt($credentials)) {
-            return redirect()->intended('admin/dashboard')
-                ->withSuccess('You have Successfully loggedin');
+
+            if (Auth::user()->hasRole('admin')) {
+                return redirect()->intended('admin/dashboard')
+                    ->withSuccess('You have Successfully loggedin');
+            } elseif (Auth::user()->hasRole('super_admin')) {
+                return redirect()->intended('admin/dashboard')
+                    ->withSuccess('You have Successfully loggedin');
+            } elseif (Auth::user()->hasRole('user')) {
+                return redirect()->intended('user/dashboard')
+                    ->withSuccess('You have Successfully loggedin');
+            }
+
         }
 
         return redirect('login')->withSuccess('Oppes! You have entered invalid credentials');

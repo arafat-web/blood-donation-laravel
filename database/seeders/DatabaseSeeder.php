@@ -14,15 +14,17 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        $this->call(BloodsTableSeeder::class);
-        $this->call(CitiesTableSeeder::class);
-        $this->call(LocationsTableSeeder::class);
-        $this->call(DonorsTableSeeder::class);
-        User::create([
-            'name' => 'Admin',
-            'email' => 'admin@example.com',
-            'password' => Hash::make('12345678'), // Hash the password
-            // Add other admin attributes if needed
-        ]);
+        // $this->call(BloodsTableSeeder::class);
+        // $this->call(CitiesTableSeeder::class);
+        // $this->call(LocationsTableSeeder::class);
+        // $this->call(DonorsTableSeeder::class);
+        // User::create([
+        //     'name' => 'Admin',
+        //     'email' => 'admin@example.com',
+        //     'password' => Hash::make('12345678'), // Hash the password
+        //     // Add other admin attributes if needed
+        // ]);
+        $this->call(RoleSeeder::class);
+        $this->call(UserSeeder::class);
     }
 }
