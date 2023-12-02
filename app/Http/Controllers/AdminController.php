@@ -6,7 +6,6 @@ use App\Models\Blood;
 use App\Models\City;
 use App\Models\Donor;
 use App\Models\Location;
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class AdminController extends Controller
@@ -22,19 +21,22 @@ class AdminController extends Controller
             return view('admin.index', compact('total', 'active', 'inactive', 'request'));
         }
 
-        return redirect("login")->withSuccess('Opps! You do not have access');
+        return redirect('login')->withSuccess('Opps! You do not have access');
     }
+
     public function addDonor()
     {
         if (Auth::check()) {
             $bloods = Blood::all();
             $cities = City::orderBy('id', 'DESC')->get();
             $locations = Location::orderBy('id', 'DESC')->get();
+
             return view('admin.add-donor', compact('bloods', 'cities', 'locations'));
         }
 
-        return redirect("login")->withSuccess('Opps! You do not have access');
+        return redirect('login')->withSuccess('Opps! You do not have access');
     }
+
     public function donorRequest()
     {
         if (Auth::check()) {
@@ -45,11 +47,13 @@ class AdminController extends Controller
                 ->where('status', 0)
                 ->orderBy('donors.id', 'DESC')
                 ->get();
+
             return view('admin.donor-request', compact('donors'));
         }
 
-        return redirect("login")->withSuccess('Opps! You do not have access');
+        return redirect('login')->withSuccess('Opps! You do not have access');
     }
+
     public function donorList()
     {
         if (Auth::check()) {
@@ -65,25 +69,29 @@ class AdminController extends Controller
             return view('admin.donor-list', compact('donors'));
         }
 
-        return redirect("login")->withSuccess('Opps! You do not have access');
+        return redirect('login')->withSuccess('Opps! You do not have access');
     }
+
     public function locationSettings()
     {
         if (Auth::check()) {
             $cities = City::orderBy('id', 'DESC')->get();
             $locations = Location::orderBy('id', 'DESC')->get();
+
             return view('admin.location-settings', compact('cities', 'locations'));
         }
 
-        return redirect("login")->withSuccess('Opps! You do not have access');
+        return redirect('login')->withSuccess('Opps! You do not have access');
     }
+
     public function donationSettings()
     {
         if (Auth::check()) {
             $bloods = Blood::all();
+
             return view('admin.donation-settings', compact('bloods'));
         }
 
-        return redirect("login")->withSuccess('Opps! You do not have access');
+        return redirect('login')->withSuccess('Opps! You do not have access');
     }
 }

@@ -25,14 +25,14 @@ class DonorsTableSeeder extends Seeder
             Donor::create([
                 'fullname' => $this->generateFullName(),
                 'phone' => $this->generateRandomPhone(),
-                'email' => 'donor' . ($i + 1) . '@example.com',
+                'email' => 'donor'.($i + 1).'@example.com',
                 'blood_group' => $bloodGroups[array_rand($bloodGroups)],
                 'gender' => $this->generateRandomGender(),
                 'profession' => $this->generateRandomProfession(),
                 'date_of_birth' => $this->generateRandomDateOfBirth(),
                 'city' => $cities[array_rand($cities)],
                 'location' => $locations[array_rand($locations)],
-                'address' => 'Address ' . ($i + 1),
+                'address' => 'Address '.($i + 1),
                 'status' => 1,
                 'active_status' => 1,
                 'profile_views' => 1,
@@ -53,7 +53,7 @@ class DonorsTableSeeder extends Seeder
         $firstName = $firstNames[array_rand($firstNames)];
         $lastName = $lastNames[array_rand($lastNames)];
 
-        return $firstName . ' ' . $lastName;
+        return $firstName.' '.$lastName;
     }
 
     /**
@@ -63,7 +63,7 @@ class DonorsTableSeeder extends Seeder
      */
     private function generateRandomPhone()
     {
-        return '01' . mt_rand(10000000, 99999999);
+        return '01'.mt_rand(10000000, 99999999);
     }
 
     /**
@@ -74,6 +74,7 @@ class DonorsTableSeeder extends Seeder
     private function generateRandomGender()
     {
         $genders = ['Male', 'Female', 'Other'];
+
         return $genders[array_rand($genders)];
     }
 
@@ -95,6 +96,7 @@ class DonorsTableSeeder extends Seeder
     private function generateRandomProfession()
     {
         $professions = ['Engineer', 'Doctor', 'Teacher', 'Artist', 'Software Developer', 'Student'];
+
         return $professions[array_rand($professions)];
     }
 }

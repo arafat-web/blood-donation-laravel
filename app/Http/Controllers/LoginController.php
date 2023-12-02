@@ -2,9 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use Session;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Session;
 
 class LoginController extends Controller
 {
@@ -27,7 +27,7 @@ class LoginController extends Controller
                 ->withSuccess('You have Successfully loggedin');
         }
 
-        return redirect("login")->withSuccess('Oppes! You have entered invalid credentials');
+        return redirect('login')->withSuccess('Oppes! You have entered invalid credentials');
     }
 
     public function logout()

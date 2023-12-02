@@ -11,6 +11,7 @@ class BloodController extends Controller
     public function add(Request $request)
     {
         Blood::create($request->all());
+
         return back()->with('message', 'Blood Group Added!');
 
     }
