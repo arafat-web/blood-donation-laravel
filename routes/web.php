@@ -27,7 +27,7 @@ Route::get('/donor-register', [HomeController::class, 'donorRegister'])->name('d
 Route::post('/search-donor', [HomeController::class, 'searchDonor'])->name('search.donor');
 Route::get('/donor-profile/{id}', [HomeController::class, 'donorProfile'])->name('donor.profile');
 
-Route::get('login', [LoginController::class, 'index'])->name('login');
+Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('post-login', [LoginController::class, 'postLogin'])->name('login.post');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
@@ -36,8 +36,7 @@ Route::group(['middleware' => ['CheckRole:user']], function () {
         Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
     });
 });
-
-Route::group(['middleware' => ['CheckRole:admin']], function () {
+Route::group(['middleware' => ['role:admin|super_admin']], function () {
     Route::prefix('admin')->group(function () {
         Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
         Route::get('/add-donor', [AdminController::class, 'addDonor'])->name('add.donor');
@@ -45,7 +44,7 @@ Route::group(['middleware' => ['CheckRole:admin']], function () {
         Route::get('/donor-list', [AdminController::class, 'donorList'])->name('donor.list');
         Route::get('/location-settings', [AdminController::class, 'locationSettings'])->name('location.settings');
         Route::get('/donation-settings', [AdminController::class, 'donationSettings'])->name('donation.settings');
-
+        Route::get('/settings', [AdminController::class, 'index'])->name('admin.settings');
         Route::prefix('group')->group(function () {
             Route::post('/add', [BloodController::class, 'add'])->name('blood.add');
             // Route::post("/add-donor", [DonorController::class, 'addDonor'])->name('add.donor');
@@ -72,33 +71,9 @@ Route::group(['middleware' => ['CheckRole:admin']], function () {
 Route::group(['middleware' => ['role:super_admin']], function () {
 
     Route::prefix('admin')->group(function () {
-        Route::get('/dashboard', [AdminController::class, 'index'])->name('dashboard');
-        Route::get('/add-donor', [AdminController::class, 'addDonor'])->name('add.donor');
-        Route::get('/donor-request', [AdminController::class, 'donorRequest'])->name('donor.request');
-        Route::get('/donor-list', [AdminController::class, 'donorList'])->name('donor.list');
-        Route::get('/location-settings', [AdminController::class, 'locationSettings'])->name('location.settings');
-        Route::get('/donation-settings', [AdminController::class, 'donationSettings'])->name('donation.settings');
-
-        Route::prefix('group')->group(function () {
-            Route::post('/add', [BloodController::class, 'add'])->name('blood.add');
-            // Route::post("/add-donor", [DonorController::class, 'addDonor'])->name('add.donor');
-            // Route::get("/donor-request", [AdminController::class, 'donorRequest'])->name('donor.request');
-            // Route::get("/donor-list", [AdminController::class, 'donorList'])->name('donor.list');
-        });
-
-        Route::prefix('donor')->group(function () {
-            Route::post('/add', [DonorController::class, 'addDonor'])->name('add.new.donor');
-            Route::get('/accpet/{id}', [DonorController::class, 'acceptDonor'])->name('accept.donor');
-            Route::get('/request/delete/{id}', [DonorController::class, 'deleteRequest'])->name('delete.request');
-        });
-
-        Route::prefix('city')->group(function () {
-            Route::post('/add', [CityLocationController::class, 'addCity'])->name('city.add');
-        });
-
-        Route::prefix('location')->group(function () {
-            Route::post('/add', [CityLocationController::class, 'addLocation'])->name('location.add');
-        });
+        Route::get('/settings', [AdminController::class, 'addAdmin'])->name('admin.settings');
+        Route::post('/add/admin', [AdminController::class, 'add'])->name('add.admin');
+        Route::get('/admin/delete/{id}', [AdminController::class, 'destroy'])->name('delete.admin');
     });
 
 });

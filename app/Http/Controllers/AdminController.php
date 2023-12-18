@@ -6,7 +6,11 @@ use App\Models\Blood;
 use App\Models\City;
 use App\Models\Donor;
 use App\Models\Location;
+use App\Models\User;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
+use Spatie\Permission\Models\Role;
 
 class AdminController extends Controller
 {
@@ -86,10 +90,60 @@ class AdminController extends Controller
     {
         if (Auth::check()) {
             $bloods = Blood::all();
-
             return view('admin.donation-settings', compact('bloods'));
         }
 
         return redirect('login')->withSuccess('Opps! You do not have access');
+    }
+
+    public function addAdmin(){
+        // $users = User::all();
+        $users = User::whereHas('roles', function ($query) {
+            $query->where('name', 'admin');
+        })->get();
+        
+        return view('admin.add-admin', compact('users'));
+    }
+
+    public function add(Request $request)
+    {
+        DB::beginTransaction();
+    
+        try {
+            // Create the user
+            $user = User::create([
+                'name' => $request->name,
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+            ]);
+    
+            // Check if user creation was successful
+            if ($user) {
+                // Find the role (assuming you've already created it)
+                $role = Role::find(2);
+    
+                // Assign the role to the user
+                $user->assignRole($role);
+    
+                // Commit the transaction
+                DB::commit();
+    
+                // Redirect with success message
+                return redirect()->back()->with('message', 'User added successfully');
+            }
+        } catch (\Exception $e) {
+            // If an exception occurs, rollback the transaction
+            DB::rollback();
+    
+            // Redirect with error message
+            return redirect()->back()->with('error', 'Failed to add user');
+        }
+    }
+
+    public  function destroy($id){
+
+        $user = User::find($id);
+        $user->delete();
+        return back()->with('message', 'User deleted successfully');
     }
 }

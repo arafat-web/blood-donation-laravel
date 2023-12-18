@@ -53,7 +53,13 @@
             <i class="fas fa-fw fa-table"></i>
             <span>Donation Settings</span></a>
     </li>
-
+    @if(auth()->check() && auth()->user()->hasRole('super_admin'))
+    <li class="nav-item {{ request()->routeIs('admin.settings') ? 'active' : null }}">
+        <a class="nav-link" href="{{route('admin.settings')}}">
+            <i class="fas fa-fw fa-user"></i>
+            <span>Admin Settings</span></a>
+    </li>
+    @endif
     <hr class="sidebar-divider">
     <!-- Heading -->
     <div class="sidebar-heading">
