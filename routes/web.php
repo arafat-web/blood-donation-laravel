@@ -31,6 +31,12 @@ Route::get('/login', [LoginController::class, 'index'])->name('login');
 Route::post('post-login', [LoginController::class, 'postLogin'])->name('login.post');
 Route::get('logout', [LoginController::class, 'logout'])->name('logout');
 
+Route::prefix('donor')->group(function () {
+    Route::post('/add', [DonorController::class, 'addDonor'])->name('add.new.donor');
+    Route::get('/accpet/{id}', [DonorController::class, 'acceptDonor'])->name('accept.donor');
+    Route::get('/request/delete/{id}', [DonorController::class, 'deleteRequest'])->name('delete.request');
+});
+
 Route::group(['middleware' => ['CheckRole:user']], function () {
     Route::prefix('user')->group(function () {
         Route::get('/dashboard', [UserController::class, 'index'])->name('user.dashboard');
@@ -45,19 +51,10 @@ Route::group(['middleware' => ['role:admin|super_admin']], function () {
         Route::get('/location-settings', [AdminController::class, 'locationSettings'])->name('location.settings');
         Route::get('/donation-settings', [AdminController::class, 'donationSettings'])->name('donation.settings');
         Route::get('/settings', [AdminController::class, 'index'])->name('admin.settings');
+
         Route::prefix('group')->group(function () {
             Route::post('/add', [BloodController::class, 'add'])->name('blood.add');
-            // Route::post("/add-donor", [DonorController::class, 'addDonor'])->name('add.donor');
-            // Route::get("/donor-request", [AdminController::class, 'donorRequest'])->name('donor.request');
-            // Route::get("/donor-list", [AdminController::class, 'donorList'])->name('donor.list');
         });
-
-        Route::prefix('donor')->group(function () {
-            Route::post('/add', [DonorController::class, 'addDonor'])->name('add.new.donor');
-            Route::get('/accpet/{id}', [DonorController::class, 'acceptDonor'])->name('accept.donor');
-            Route::get('/request/delete/{id}', [DonorController::class, 'deleteRequest'])->name('delete.request');
-        });
-
         Route::prefix('city')->group(function () {
             Route::post('/add', [CityLocationController::class, 'addCity'])->name('city.add');
         });

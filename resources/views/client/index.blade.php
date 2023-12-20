@@ -202,7 +202,7 @@
                             <h5 class="card-text">{{$donor->fullname}}</h5>
                             <p class="card-text small">Blood Group: ({{$donor->blood_group_name}})</p>
                             <p class="card-text small">{{$donor->location_name . ', ' . $donor->city_name}}</p>
-                            <button class="btn mt-2 btn-sm btn-outline-light"><a class="text-white" href="{{ route('donor.profile', ['id'=> $donor->donor_id]) }}"> View
+                            <button class="btn mt-2 btn-sm btn-danger"><a class="text-white" href="{{ route('donor.profile', ['id'=> $donor->donor_id]) }}"> View
                                 Profile</a></button>
                         </div>
                     </div>
